@@ -50,6 +50,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 ROOT_URLCONF = 'forums.urls'
@@ -83,6 +85,19 @@ DATABASES = {
         'HOST': 'localhost',
         'USER': 'syntacs',
         'PASSWORD': 'RpLnX5rT7qIedFHg',
+    }
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
+        'LOCATION': '127.0.0.1:11211',
+        'OPTIONS': {
+            'binary': True,
+            'behaviors': {
+                'ketama': True,
+            }
+        }
     }
 }
 
